@@ -15,13 +15,28 @@ Built with FastAPI, PostgreSQL, and Docker. Designed for internal teams or commu
 
 ## Project Structure
 
-app/
-├── core/        # security, dependencies, shared utilities
-├── models/      # SQLAlchemy table definitions
-├── routers/     # HTTP endpoints
-├── schemas/     # Pydantic request/response shapes
-├── services/    # business logic
-└── tasks/       # background jobs
+```text
+.
+├── app/
+│   ├── core/
+│   │   ├── dependencies.py   # shared FastAPI dependencies
+│   │   └── security.py       # password hashing, JWT handling
+│   ├── models/               # SQLAlchemy table definitions
+│   │   ├── base.py
+│   │   └── user.py
+│   ├── routers/              # HTTP endpoints
+│   │   └── auth.py
+│   ├── schemas/              # Pydantic request/response shapes
+│   │   └── user.py
+│   ├── config.py             # settings loaded from environment
+│   ├── database.py           # engine and session setup
+│   └── main.py               # FastAPI app entrypoint
+├── migrations/               # Alembic migration environment
+│   └── versions/
+├── alembic.ini
+├── requirements.txt
+└── .env.example
+```
 
 ## Getting Started
 
