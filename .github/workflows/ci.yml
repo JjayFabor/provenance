@@ -76,8 +76,17 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
+          envs: CLOUDFLARE_ORIGIN_CERT,CLOUDFLARE_ORIGIN_KEY
           script: |
+            mkdir -p ~/nginx/certs
+            echo "$CLOUDFLARE_ORIGIN_CERT" > ~/nginx/certs/origin.pem
+            echo "$CLOUDFLARE_ORIGIN_KEY" > ~/nginx/certs/origin.key
+            chmod 600 ~/nginx/certs/origin.pem
+            chmod 600 ~/nginx/certs/origin.key
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 108728974961.dkr.ecr.us-east-1.amazonaws.com
             docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d
             docker-compose -f docker-compose.prod.yml exec -T app alembic upgrade head
+        env:
+          CLOUDFLARE_ORIGIN_CERT: ${{ secrets.CLOUDFLARE_ORIGIN_CERT }}
+          CLOUDFLARE_ORIGIN_KEY: ${{ secrets.CLOUDFLARE_ORIGIN_KEY }}
