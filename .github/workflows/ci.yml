@@ -60,6 +60,15 @@ jobs:
           docker tag provenance:latest 108728974961.dkr.ecr.us-east-1.amazonaws.com/provenance:latest
           docker push 108728974961.dkr.ecr.us-east-1.amazonaws.com/provenance:latest
 
+      - name: Copy compose and nginx config to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "docker-compose.prod.yml,nginx/nginx.conf"
+          target: "~/"
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
