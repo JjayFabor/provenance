@@ -4,10 +4,13 @@ from sqlalchemy.dialects.postgresql import UUID
 from datetime import datetime, timezone
 import uuid
 from app.models.base import Base
+
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from app.models.skill import Skill
     from app.models.endorsement import Endorsement
+    from app.models.availability import Availability
+    from app.models.session import BookingSession
 
 class User(Base):
     __tablename__ = "users"
@@ -29,5 +32,16 @@ class User(Base):
     endorsements_given: Mapped[list["Endorsement"]] = relationship(
         foreign_keys="Endorsement.endorser_id",
         back_populates="endorser",
+        cascade="all, delete-orphan"
+    )
+    availabilities: Mapped[list["Availability"]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
+    sessions_as_mentor: Mapped[list["BookingSession"]] = relationship(
+        foreign_keys="BookingSession.mentor_id",
+        cascade="all, delete-orphan"
+    )
+    sessions_as_learner: Mapped[list["BookingSession"]] = relationship(
+        foreign_keys="BookingSession.learner_id",
         cascade="all, delete-orphan"
     )

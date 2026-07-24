@@ -9,6 +9,8 @@ from app.models.base import Base
 from app.models import user
 from app.models import skill
 from app.models import endorsement
+from app.models import availability
+from app.models import session
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
