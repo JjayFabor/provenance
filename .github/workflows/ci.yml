@@ -66,7 +66,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "docker-compose.prod.yml,nginx/nginx.conf"
+          source: "docker-compose.prod.yml,nginx/nginx.conf,nginx/certs/origin.pem,nginx/certs/origin.key"
           target: "~/"
           overwrite: true
 
