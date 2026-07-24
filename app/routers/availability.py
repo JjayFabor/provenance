@@ -33,7 +33,7 @@ def get_my_availability(
     availabilities = db.execute(
         select(Availability).where(
             Availability.user_id == current_user.id,
-            Availability.is_active == True
+            Availability.is_active.is_(True)
         )
     ).scalars().all()
     return availabilities
@@ -48,7 +48,7 @@ def get_user_availability(
     availabilities = db.execute(
         select(Availability).where(
             Availability.user_id == user_id,
-            Availability.is_active == True
+            Availability.is_active.is_(True)
         )
     ).scalars().all()
     return availabilities

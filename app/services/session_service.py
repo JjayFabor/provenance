@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import select
 from fastapi import HTTPException, status
 from app.models.session import BookingSession, SessionStatus
 from app.models.skill import Skill

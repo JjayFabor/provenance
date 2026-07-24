@@ -17,7 +17,7 @@ def is_within_availability(
                 Availability.user_id == mentor_id,
                 Availability.start_time <= start_time,
                 Availability.end_time >= end_time,
-                Availability.is_active == True
+                Availability.is_active.is_(True)
             )
         )
     ).scalars().first()

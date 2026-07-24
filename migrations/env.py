@@ -6,11 +6,11 @@ from sqlalchemy import pool
 from alembic import context
 from app.config import settings
 from app.models.base import Base
-from app.models import user
-from app.models import skill
-from app.models import endorsement
-from app.models import availability
-from app.models import session
+from app.models import user  # noqa: F401
+from app.models import skill  # noqa: F401
+from app.models import endorsement  # noqa: F401
+from app.models import availability  # noqa: F401
+from app.models import session  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

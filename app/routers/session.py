@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from sqlalchemy import select, or_
 from app.database import get_db
-from app.models.session import BookingSession, SessionStatus
+from app.models.session import BookingSession
 from app.models.user import User
 from app.schemas.session import SessionCreate, SessionResponse, SessionStatusUpdate
 from app.core.dependencies import get_current_user
